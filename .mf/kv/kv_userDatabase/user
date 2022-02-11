@@ -1,0 +1,1 @@
+{"algorithms":{"ES256":{"name":"ECDSA","namedCurve":"P-256","hash":{"name":"SHA-256"}},"ES384":{"name":"ECDSA","namedCurve":"P-384","hash":{"name":"SHA-384"}},"ES512":{"name":"ECDSA","namedCurve":"P-512","hash":{"name":"SHA-512"}},"HS256":{"name":"HMAC","hash":{"name":"SHA-256"}},"HS384":{"name":"HMAC","hash":{"name":"SHA-384"}},"HS512":{"name":"HMAC","hash":{"name":"SHA-512"}}}}

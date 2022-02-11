@@ -29,7 +29,7 @@ function handleCode(){
   }
 
   async function sendCodeToServer(){
-    const server = "http://localhost:1235/code"
+    const server = "http://localhost:8788/api/code"
     try {
       const res = await fetch(server,{
         method: "POST",
@@ -62,7 +62,7 @@ function protectedRequest(){
   }
 
   async function fetchRepos() {
-    const server = "http://localhost:1235/repos";
+    const server = "http://localhost:8788/api/repos";
     try {
       const res = await fetch(server, {
         headers: {

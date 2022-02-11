@@ -2,16 +2,19 @@
   "name": "pages-oauth",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx parcel client/index.html"
+    "dev": " npx parcel client/index.html",
+    "start": "npx wrangler pages dev --kv kv_userDatabase -- npm run dev"
   },
   "author": "Obinna Ekwuno",
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "qs": "^6.10.3",
     "query-string": "^7.1.1",
     "wrangler": "0.0.15"
   },
   "devDependencies": {
+    "@tsndr/cloudflare-worker-jwt": "^1.1.5",
     "parcel": "^2.2.1"
   }
 }

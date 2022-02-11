@@ -105,7 +105,7 @@ async function verifyJWT(jwt,token){
 }
 
 async function fetchRepos(token){
-   const url = `${config.RESOURCE_ENDPOINT}/user/repos?sort=created&direction=desc`
+   const url = `${config.RESOURCE_ENDPOINT}user/repos?per_page=100`
     const res = await fetch(url,{
         headers:{
             'Authorization': `Bearer ${token}`
@@ -114,4 +114,5 @@ async function fetchRepos(token){
 
     const data = await res.json()
     console.log(data)
+    return data
 }
