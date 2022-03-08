@@ -3,7 +3,8 @@ import qs from "query-string";
 
 export async function onRequestPost({ request, env }) {
   try {
-    const body = await request.json(); // use request.body  to make request body a readable stream
+    const body = await request.json();
+    console.log(body) // use request.json  to make request body a readable stream
     const token = await exchangeCodeForToken(body.code);
     const user = await fetchUser(token);
     const jwtencoded = await encodeJWT(user, token);
