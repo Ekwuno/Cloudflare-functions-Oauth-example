@@ -29,8 +29,12 @@ const config = {
 };
 
 async function verifyJWT(jwt, token) {
-  return jwts.verify(jwt, token);
+  const decoded = await jwts.verify(jwt, token);
+  console.log(decoded);
+  return await jwt.verify(token, "secret");
+  // return jwts.verify(jwt, token);
 }
+
 async function fetchRepos(token) {
   const url = `${config.RESOURCE_ENDPOINT}user/repos?per_page=100`;
   const res = await fetch(url, {

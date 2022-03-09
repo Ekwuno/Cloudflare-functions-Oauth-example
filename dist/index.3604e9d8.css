@@ -1,0 +1,37 @@
+body {
+  margin: 40px auto;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  margin: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 16px;
+  background-color: #fbeee088;
+  border: 2px solid #111;
+  border-radius: 5px;
+  box-shadow: #111 4px 4px 0 0;
+  color: #111;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0 30px;
+  line-height: 50px;
+}
+
+.btn:hover {
+  background-color: #fff;
+}
+
+.btn:active {
+  box-shadow: #111 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+/*# sourceMappingURL=index.3604e9d8.css.map */

@@ -39,9 +39,10 @@ function handleCode(){
         }),
         headers:{'Content-Type' :'application/json' }
       })
-      const data = await res.json()
-      console.log(data)
-      localStorage.setItem('jwt', data.jwt)
+      
+      const data = await res.json() 
+      console.log("hellloo ", data)
+      localStorage.setItem("jwt", JSON.stringify(data.jwtencoded));
       window.location.href = config.REDIRECT_URL;
       
     } catch (error) {

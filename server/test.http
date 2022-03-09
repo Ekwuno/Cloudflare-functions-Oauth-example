@@ -1,3 +1,0 @@
-GET http://localhost:1235/repos 
-Content-type: application/json
-req.body 

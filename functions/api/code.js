@@ -1,4 +1,5 @@
 import qs from "query-string";
+import jwt from "@tsndr/cloudflare-worker-jwt";
 // import jwt from "@tsndr/cloudflare-worker-jwt";
 
 export async function onRequestPost({ request, env }) {
@@ -13,7 +14,13 @@ export async function onRequestPost({ request, env }) {
       jwtencoded,
       JSON.stringify({ jwt: jwtencoded, user, token })
     );
-    return new Response(JSON.stringify({ jwtencoded }));
+    console.log(jwtencoded);
+    return new Response(JSON.stringify({ jwtencoded }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
     // res.json({ jwt });
   } catch (error) {
     console.log(error);
@@ -49,6 +56,7 @@ async function exchangeCodeForToken(code) {
 
   const data = await res.text();
   const parsedData = qs.parse(data);
+  console.log(parsedData.access_token);
   return parsedData.access_token;
 }
 
@@ -67,7 +75,6 @@ async function fetchUser(token) {
 }
 
 async function encodeJWT(user, token) {
-  const jwt = require("@tsndr/cloudflare-worker-jwt");
   const jwtPayload = {
     login: user.login,
     id: user.id,
