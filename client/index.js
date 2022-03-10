@@ -51,40 +51,63 @@ function handleCode(){
   }
 }
 
-function protectedRequest(){
-  const requestButton = document.querySelector('button');
-  requestButton.style.display = "none"
+// function protectedRequest(){
+//   const requestButton = document.querySelector('button');
+//   requestButton.style.display = "none"
 
-  if(localStorage.getItem('jwt')){
-    requestButton.style.display = "block"
-    requestButton.addEventListener('click',function(){
-      fetchRepos()
-    })
-  }
+//   if(localStorage.getItem('jwt')){
+//     requestButton.style.display = "block"
+//     requestButton.addEventListener('click',function(){
+//       fetchRepos()
+//     })
+//   }
 
-  async function fetchRepos() {
-    const server = "http://localhost:8788/api/repos";
-    try {
-      const res = await fetch(server, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+//   async function fetchRepos() {
+//     const server = "http://localhost:8788/api/repos";
+//     try {
+//       const res = await fetch(server, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+//         },
+//       });
+//       const data = await res.json();
+//       console.log(data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// }
+
+
+const requestButton = document.querySelector("button");
+
+requestButton.style.display = "none";
+
+if (localStorage.getItem("jwt")) {
+  requestButton.style.display = "block";
+  requestButton.addEventListener("click", function () {
+    fetchRepos();
+  });
 }
 
+async function fetchRepos() {
+  const server = "http://localhost:8788/api/repos";
+  try {
+    const res = await fetch(server, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    });
 
-
+    const data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 
 window.onload = function () {
     getAppauthorization();
     handleCode();
-    protectedRequest();    
+    // protectedRequest();    
 };

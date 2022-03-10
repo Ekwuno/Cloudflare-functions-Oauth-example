@@ -563,34 +563,56 @@ function handleCode() {
         }
     }
 }
-function protectedRequest() {
-    const requestButton = document.querySelector('button');
-    requestButton.style.display = "none";
-    if (localStorage.getItem('jwt')) {
-        requestButton.style.display = "block";
-        requestButton.addEventListener('click', function() {
-            fetchRepos();
+// function protectedRequest(){
+//   const requestButton = document.querySelector('button');
+//   requestButton.style.display = "none"
+//   if(localStorage.getItem('jwt')){
+//     requestButton.style.display = "block"
+//     requestButton.addEventListener('click',function(){
+//       fetchRepos()
+//     })
+//   }
+//   async function fetchRepos() {
+//     const server = "http://localhost:8788/api/repos";
+//     try {
+//       const res = await fetch(server, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+//         },
+//       });
+//       const data = await res.json();
+//       console.log(data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// }
+const requestButton = document.querySelector("button");
+requestButton.style.display = "none";
+if (localStorage.getItem("jwt")) {
+    requestButton.style.display = "block";
+    requestButton.addEventListener("click", function() {
+        fetchRepos();
+    });
+}
+async function fetchRepos() {
+    const server = "http://localhost:8788/api/repos";
+    try {
+        const res = await fetch(server, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+            }
         });
-    }
-    async function fetchRepos() {
-        const server = "http://localhost:8788/api/repos";
-        try {
-            const res = await fetch(server, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("jwt")}`
-                }
-            });
-            const data = await res.json();
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
+        const data = await res.json();
+        console.log(data);
+    } catch (error) {
+        console.log(error);
     }
 }
 window.onload = function() {
     getAppauthorization();
     handleCode();
-    protectedRequest();
+// protectedRequest();    
 };
 
 },{"../config":"bSr8D","query-string":"11cDl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bSr8D":[function(require,module,exports) {
