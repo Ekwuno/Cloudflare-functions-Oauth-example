@@ -14,8 +14,6 @@ function  getAppauthorization() {
   const url = `${config.AUTHORIZATION_ENDPOINT}?${query}`;
   const loginLink = document.querySelector("a");
   loginLink.setAttribute("href", url);
-
-
 }
 
 
@@ -42,7 +40,7 @@ function handleCode(){
       
       const data = await res.json() 
       console.log("hellloo ", data)
-      localStorage.setItem("jwt", JSON.stringify(data.jwtencoded));
+      localStorage.setItem("jwt", data.jwtencoded);
       window.location.href = config.REDIRECT_URL;
       
     } catch (error) {

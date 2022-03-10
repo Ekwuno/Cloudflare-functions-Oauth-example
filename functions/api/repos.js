@@ -1,26 +1,27 @@
-import jwts from "@tsndr/cloudflare-worker-jwt";
+import jwt from "@tsndr/cloudflare-worker-jwt";
+import { myVerySecretString } from "./code";
+
 export async function onRequestGet({ request, env }) {
   try {
-    const jwt = request.headers.get("Authorization").split(" ")[1];
-    console.log(jwt)
-    const userString = await env.kv_userDatabase.list();
-    console.log(userString)
-    const LatestJWT = String(
-      userString.keys[userString.keys.length - 1 - 1 - 1].name
-    );
-      console.log(LatestJWT);
-      console.log (typeof LatestJWT)
+    const token = request.headers.get("Authorization").split(" ")[1];
 
+    // verify JWT
+    const verifiedJWT = await jwt.verify(token, myVerySecretString)
+    if (!verifiedJWT) {
+      return new Response("Not valid JWT", {status: 401})
+    }
+    
+    const decodedJwt = jwt.decode(token)
 
-    // const user = JSON.parse(LatestJWT);
-    // console.log(user);
-    // const token = user.token;
+    const user = await env.kv_userDatabase.get(`${decodedJwt.id}`, "json")
 
-    // await verifyJWT(jwt, token);
+    if (!user) {
+      return new Response("User not found", {status: 404})
+    }
 
-    // const repos = await fetchRepos(token);
-    // return new Response(JSON.stringify(repos));
-    // // res.json(repos); // Send repos to client
+    const repos = await fetchRepos(user.token);
+    return new Response(JSON.stringify(repos));
+    // res.json(repos); // Send repos to client
   } catch (error) {
     console.log(error);
     return new Response(JSON.stringify({ error }));
@@ -50,15 +51,16 @@ const config = {
 //   // return jwts.verify(jwt, token);
 // }
 
-// async function fetchRepos(token) {
-//   const url = `${config.RESOURCE_ENDPOINT}user/repos?per_page=100`;
-//   const res = await fetch(url, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
+ async function fetchRepos(token) {
+   console.log(token)
+   const url = `${config.RESOURCE_ENDPOINT}user/repos?per_page=100`;
+   const res = await fetch(url, {
+     headers: {
+       Authorization: `Bearer ${token}`,
+       "user-agent": "Pages Functions"
+     },
+   });
 
-//   const data = await res.json();
-//   console.log(data);
-//   //   return data;
-// }
+   const data = await res.json();
+   return data;
+ }
