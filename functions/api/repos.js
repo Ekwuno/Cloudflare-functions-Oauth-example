@@ -28,10 +28,15 @@ const config = {
   RESOURCE_ENDPOINT: "https://api.github.com/",
 };
 
+// async function verifyJWT(jwt, token) {
+//   const decoded = await jwts.verify(jwt, token);
+//   console.log(decoded);
+//   return await jwt.verify(token, "secret");
+//   // return jwts.verify(jwt, token);
+// }
+
 async function verifyJWT(jwt, token) {
-  const decoded = await jwts.verify(jwt, token);
-  console.log(decoded);
-  return await jwt.verify(token, "secret");
+  return jwts.verify(jwt, token);
   // return jwts.verify(jwt, token);
 }
 

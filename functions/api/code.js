@@ -9,7 +9,10 @@ export async function onRequestPost({ request, env }) {
     const token = await exchangeCodeForToken(body.code);
     const user = await fetchUser(token);
     const jwtencoded = await encodeJWT(user, token);
-
+    const JWTdecoded = await verifyJWT(jwtencoded, token);
+    // console.log("life ok " + JWTdecoded)
+    console.log(JWTdecoded);
+// console.log("life")
     await env.kv_userDatabase.put(
       jwtencoded,
       JSON.stringify({ jwt: jwtencoded, user, token })
@@ -83,4 +86,9 @@ async function encodeJWT(user, token) {
   
   return jwt.sign(jwtPayload, token);
   // return token; // Can't use JsonWebToken because it's not available in workers
+}
+
+async function verifyJWT(jwtencoded, token) {
+  return jwt.verify(jwtencoded, token);
+  // return jwts.verify(jwt, token);
 }
