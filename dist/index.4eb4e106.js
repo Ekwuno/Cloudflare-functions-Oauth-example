@@ -556,7 +556,7 @@ function handleCode() {
             });
             const data = await res.json();
             console.log("hellloo ", data);
-            localStorage.setItem("jwt", JSON.stringify(data.jwtencoded));
+            localStorage.setItem("jwt", data.jwtencoded);
             window.location.href = _configDefault.default.REDIRECT_URL;
         } catch (error) {
             console.log(error);
@@ -605,6 +605,16 @@ async function fetchRepos() {
         });
         const data = await res.json();
         console.log(data);
+        for (var i of data){
+            const repo = document.createElement("div");
+            repo.innerHTML = i.name;
+            document.body.appendChild(repo);
+        }
+    // for(var i of listofRepos){
+    //   console.log(i.name)
+    // }
+    // // listofRepos.map((repo) => {))
+    // document.getElementById("repos").innerHTML = listofRepos;
     } catch (error) {
         console.log(error);
     }
@@ -620,7 +630,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
     CLIENT_ID: "d00bdb1af84c4faef82c",
-    CLIENT_SECRET: "5735f21e979685a52a7de10e30c936c661b565a5",
+    CLIENT_SECRET: "16bf26fbf9fc5aad2f1eee3b94c5d6363d13470d",
     REDIRECT_URL: "http://localhost:8788/",
     AUTHORIZATION_ENDPOINT: "https://github.com/login/oauth/authorize",
     TOKEN_ENDPOINT: "https://github.com/login/oauth/access_token",

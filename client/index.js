@@ -96,7 +96,18 @@ async function fetchRepos() {
     });
 
     const data = await res.json();
-    console.log(data);
+    console.log(data)
+
+    for( var i of data){
+      const repo = document.createElement("div")
+      repo.innerHTML = i.name
+      document.body.appendChild(repo)
+    }
+    // for(var i of listofRepos){
+    //   console.log(i.name)
+    // }
+    // // listofRepos.map((repo) => {))
+    // document.getElementById("repos").innerHTML = listofRepos;
   } catch (error) {
     console.log(error);
   }
