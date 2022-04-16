@@ -5,7 +5,7 @@ import jwt from "@tsndr/cloudflare-worker-jwt";
 // Workers env variable
 export const myVerySecretString = "gfddfshgfhd65345234bvcfdgsfsd";
 
-export async function onRequest({ request, env }) {
+export async function onRequestPost({ request, env }) {
   try {
     const code = new URL(request.url).searchParams.get("code");
     if (!code) return next();

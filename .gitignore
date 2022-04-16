@@ -3,11 +3,9 @@
 .env.local
 .cache
 .mf
-dist
 .parcel-cache
 
 node_modules
 .parcel-cache/
 .mf 
-dist/
 config.js
