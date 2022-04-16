@@ -2,29 +2,28 @@ import qs from "query-string";
 import jwt from "@tsndr/cloudflare-worker-jwt";
 // import jwt from "@tsndr/cloudflare-worker-jwt";
 
-
 // Workers env variable
-export const myVerySecretString = "gfddfshgfhd65345234bvcfdgsfsd"
+export const myVerySecretString = "gfddfshgfhd65345234bvcfdgsfsd";
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestGet({ request, env }) {
   try {
-    const body = await request.json();
-    console.log(body) // use request.json  to make request body a readable stream
-    const token = await exchangeCodeForToken(body.code);
+    const code = new URL(request.url).searchParams.get("code");
+    if (!code) return next();
+
+    const token = await exchangeCodeForToken(code);
     const user = await fetchUser(token);
     const jwtencoded = await encodeJWT(user, myVerySecretString);
 
     await env.kv_userDatabase.put(
       `${user.id}`,
       JSON.stringify({ user, token })
-    )
+    );
 
     console.log(jwtencoded);
-    return new Response(JSON.stringify({ jwtencoded }),
-    {
+    return new Response(JSON.stringify({ jwtencoded }), {
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     });
     // res.json({ jwt });
   } catch (error) {
@@ -86,7 +85,7 @@ async function encodeJWT(user, token) {
     id: user.id,
     avatar_url: user.avatar_url,
   };
-  
+
   return jwt.sign(jwtPayload, token);
   // return token; // Can't use JsonWebToken because it's not available in workers
 }
