@@ -167,8 +167,7 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
         if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
             if (it) o = it;
             var i = 0;
-            var F = function F() {
-            };
+            var F = function F() {};
             return {
                 s: F,
                 n: function n() {
@@ -265,8 +264,7 @@ function Module(moduleName) {
         _acceptCallbacks: [],
         _disposeCallbacks: [],
         accept: function accept(fn) {
-            this._acceptCallbacks.push(fn || function() {
-            });
+            this._acceptCallbacks.push(fn || function() {});
         },
         dispose: function dispose(fn) {
             this._disposeCallbacks.push(fn);
@@ -275,7 +273,7 @@ function Module(moduleName) {
     module.bundle.hotData = undefined;
 }
 module.bundle.Module = Module;
-var checkedAssets, acceptedAssets, assetsToAccept;
+var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
     return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
 }
@@ -289,10 +287,8 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
     var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
     var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
     ws.onmessage = function(event) {
-        checkedAssets = {
-        };
-        acceptedAssets = {
-        };
+        checkedAssets = {} /*: {|[string]: boolean|} */ ;
+        acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
         var data = JSON.parse(event.data);
         if (data.type === 'update') {
@@ -499,8 +495,7 @@ function hmrAcceptCheckOne(bundle, id, depsByBundle) {
 }
 function hmrAcceptRun(bundle, id) {
     var cached = bundle.cache[id];
-    bundle.hotData = {
-    };
+    bundle.hotData = {};
     if (cached && cached.hot) cached.hot.data = bundle.hotData;
     if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
         cb(bundle.hotData);
@@ -630,7 +625,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
     CLIENT_ID: "d00bdb1af84c4faef82c",
-    CLIENT_SECRET: "16bf26fbf9fc5aad2f1eee3b94c5d6363d13470d",
+    CLIENT_SECRET: "1875475451faf4c8bc1fdc69033fb4da6441d145",
     REDIRECT_URL: "http://localhost:8788/",
     AUTHORIZATION_ENDPOINT: "https://github.com/login/oauth/authorize",
     TOKEN_ENDPOINT: "https://github.com/login/oauth/access_token",
@@ -798,8 +793,7 @@ function parserForArrayFormat(options) {
                     accumulator[key] = value;
                     return;
                 }
-                if (accumulator[key] === undefined) accumulator[key] = {
-                };
+                if (accumulator[key] === undefined) accumulator[key] = {};
                 accumulator[key][result[1]] = value;
             };
         case 'bracket':
@@ -938,10 +932,10 @@ function parse(query, options) {
         ].includes(options.arrayFormat) ? value : decode(value, options);
         formatter(decode(key, options), value, ret);
     }
-    for (const key of Object.keys(ret)){
-        const value = ret[key];
+    for (const key1 of Object.keys(ret)){
+        const value = ret[key1];
         if (typeof value === 'object' && value !== null) for (const k of Object.keys(value))value[k] = parseValue(value[k], options);
-        else ret[key] = parseValue(value, options);
+        else ret[key1] = parseValue(value, options);
     }
     if (options.sort === false) return ret;
     return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce((result, key)=>{
@@ -966,9 +960,8 @@ exports.stringify = (object, options)=>{
     const shouldFilter = (key)=>options.skipNull && isNullOrUndefined(object[key]) || options.skipEmptyString && object[key] === ''
     ;
     const formatter = encoderForArrayFormat(options);
-    const objectCopy = {
-    };
-    for (const key1 of Object.keys(object))if (!shouldFilter(key1)) objectCopy[key1] = object[key1];
+    const objectCopy = {};
+    for (const key2 of Object.keys(object))if (!shouldFilter(key2)) objectCopy[key2] = object[key2];
     const keys = Object.keys(objectCopy);
     if (options.sort !== false) keys.sort(options.sort);
     return keys.map((key)=>{
@@ -993,8 +986,7 @@ exports.parseUrl = (url, options)=>{
         query: parse(extract(url), options)
     }, options && options.parseFragmentIdentifier && hash ? {
         fragmentIdentifier: decode(hash, options)
-    } : {
-    });
+    } : {});
 };
 exports.stringifyUrl = (object, options)=>{
     options = Object.assign({
@@ -1129,8 +1121,7 @@ module.exports = (string, separator)=>{
 },{}],"1up0E":[function(require,module,exports) {
 'use strict';
 module.exports = function(obj, predicate) {
-    var ret = {
-    };
+    var ret = {};
     var keys = Object.keys(obj);
     var isArr = Array.isArray(predicate);
     for(var i = 0; i < keys.length; i++){

@@ -3,26 +3,26 @@ body {
 }
 
 section {
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .btn {
-  margin: 20px;
-  font-family: 'Courier New', Courier, monospace;
   text-transform: uppercase;
-  text-decoration: none;
-  font-size: 16px;
+  color: #111;
+  cursor: pointer;
   background-color: #fbeee088;
   border: 2px solid #111;
   border-radius: 5px;
-  box-shadow: #111 4px 4px 0 0;
-  color: #111;
-  cursor: pointer;
-  font-weight: 600;
+  margin: 20px;
   padding: 0 30px;
+  font-family: Courier New, Courier, monospace;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 50px;
+  text-decoration: none;
+  box-shadow: 4px 4px #111;
 }
 
 .btn:hover {
@@ -30,8 +30,8 @@ section {
 }
 
 .btn:active {
-  box-shadow: #111 2px 2px 0 0;
   transform: translate(2px, 2px);
+  box-shadow: 2px 2px #111;
 }
 
 /*# sourceMappingURL=index.3604e9d8.css.map */

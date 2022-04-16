@@ -9,4 +9,5 @@ dist
 node_modules
 .parcel-cache/
 .mf 
-dist
+dist/
+config.js
