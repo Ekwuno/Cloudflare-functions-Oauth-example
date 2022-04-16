@@ -29,7 +29,7 @@ export async function onRequestGet({ request, env }) {
   } catch (error) {
     console.log(error);
     // res.send(error);
-    return new Response(JSON.stringify({ error }));
+    return new Response(JSON.stringify({ error: `${error}` }));
   }
 }
 
