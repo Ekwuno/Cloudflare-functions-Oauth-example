@@ -28,7 +28,7 @@ function handleCode(){
 
   async function sendCodeToServer(){
     const server =
-      "https://test-functions.cloudflare-functions-oauth-example.pages.dev/api/code";
+      "/api/code";
     try {
       const res = await fetch(server,{
         method: "POST",
@@ -91,7 +91,7 @@ if (localStorage.getItem("jwt")) {
 
 async function fetchRepos() {
   const server =
-    "https://test-functions.cloudflare-functions-oauth-example.pages.dev/api/repos";
+    "/api/repos";
   try {
     const res = await fetch(server, {
       headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
